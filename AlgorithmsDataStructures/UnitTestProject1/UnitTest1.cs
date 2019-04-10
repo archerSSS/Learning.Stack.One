@@ -310,6 +310,44 @@ namespace UnitTestProject1
 
 
         [TestMethod]
+        public void TestPushPopSizePeek_2()
+        {
+            Stack<int> stack = new Stack<int>();
+            stack.Push(1);
+            Assert.AreEqual(1, stack.Size());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+            Assert.AreEqual(0, stack.Peek());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+
+            stack.Push(2);
+            stack.Push(3);
+            Assert.AreEqual(2, stack.Size());
+            Assert.AreEqual(3, stack.Peek());
+        }
+
+
+        [TestMethod]
+        public void TestPushPopSizePeek_3()
+        {
+            Stack<int> stack = new Stack<int>();
+            stack.Push(1);
+            Assert.AreEqual(1, stack.Size());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+            Assert.AreEqual(0, stack.Peek());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+
+            stack.Push(2);
+            stack.Push(3);
+            Assert.AreEqual(2, stack.Size());
+            Assert.AreEqual(3, stack.Peek());
+        }
+        
+
+        [TestMethod]
         public void TestBalance_1()
         {
             bool b = IsBalanced("()))((()");
