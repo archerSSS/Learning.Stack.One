@@ -345,7 +345,26 @@ namespace UnitTestProject1
             Assert.AreEqual(2, stack.Size());
             Assert.AreEqual(3, stack.Peek());
         }
-        
+
+
+        [TestMethod]
+        public void TestPushPopSizePeek_4()
+        {
+            Stack<string> stack = new Stack<string>();
+            stack.Push("a");
+            Assert.AreEqual(1, stack.Size());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+            Assert.AreEqual(null, stack.Peek());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+
+            stack.Push("b");
+            stack.Push("c");
+            Assert.AreEqual(2, stack.Size());
+            Assert.AreEqual("c", stack.Peek());
+        }
+
 
         [TestMethod]
         public void TestBalance_1()
