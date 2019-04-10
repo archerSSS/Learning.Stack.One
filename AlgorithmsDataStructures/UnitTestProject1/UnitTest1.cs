@@ -37,11 +37,11 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMakeStackPeek_1()
         {
-            Stack<Sphere> stack = MakeStack(1);
+            Stack<Sphere> stack = MakeStack(2);
             Sphere s1 = stack.Peek();
             Sphere s2 = stack.Peek();
-            Assert.AreEqual(1, s1.GetDiameter());
-            Assert.AreEqual(1, s2.GetDiameter());
+            Assert.AreEqual(2, s1.GetDiameter());
+            Assert.AreEqual(2, s2.GetDiameter());
         }
 
 
@@ -54,10 +54,10 @@ namespace UnitTestProject1
             Sphere s2 = stack.Pop();
             Sphere s3 = stack.Pop();
             Sphere s4 = stack.Pop();
-            Assert.AreEqual(1, s1.GetDiameter());
-            Assert.AreEqual(2, s2.GetDiameter());
-            Assert.AreEqual(3, s3.GetDiameter());
-            Assert.AreEqual(4, s4.GetDiameter());
+            Assert.AreEqual(4, s1.GetDiameter());
+            Assert.AreEqual(3, s2.GetDiameter());
+            Assert.AreEqual(2, s3.GetDiameter());
+            Assert.AreEqual(1, s4.GetDiameter());
         }
 
 
@@ -71,32 +71,25 @@ namespace UnitTestProject1
             Sphere s4;
             Sphere s5;
             Stack<Sphere> stack = MakeStack(4);
-            try
-            {
-                s1 = stack.Pop();
-                Assert.AreEqual(1, s1.GetDiameter());
-                Assert.AreEqual(2, stack.head);
 
-                s2 = stack.Pop();
-                Assert.AreEqual(2, s2.GetDiameter());
-                Assert.AreEqual(3, stack.head);
+            s1 = stack.Pop();
+            Assert.AreEqual(4, s1.GetDiameter());
 
-                s3 = stack.Pop();
-                Assert.AreEqual(3, s3.GetDiameter());
-                Assert.AreEqual(4, stack.head);
+            s2 = stack.Pop();
+            Assert.AreEqual(3, s2.GetDiameter());
 
-                s4 = stack.Pop();
-                Assert.AreEqual(4, s4.GetDiameter());
-                Assert.AreEqual(null, stack.head);
+            s3 = stack.Pop();
+            Assert.AreEqual(2, s3.GetDiameter());
 
-                s5 = stack.Pop();
-                Assert.AreEqual(1, s1.GetDiameter());
-                Assert.AreEqual(2, s2.GetDiameter());
-                Assert.AreEqual(3, s3.GetDiameter());
-                Assert.AreEqual(4, s4.GetDiameter());
-                Assert.AreEqual(null, s5.GetDiameter());
-                Assert.AreEqual(null, stack.head);
-            } catch (Exception) { }
+            s4 = stack.Pop();
+            Assert.AreEqual(1, s4.GetDiameter());
+
+            s5 = stack.Pop();
+            Assert.AreEqual(4, s1.GetDiameter());
+            Assert.AreEqual(3, s2.GetDiameter());
+            Assert.AreEqual(2, s3.GetDiameter());
+            Assert.AreEqual(1, s4.GetDiameter());
+            Assert.AreEqual(null, s5);
         }
 
 
@@ -208,9 +201,9 @@ namespace UnitTestProject1
             Sphere s2 = stack.Pop();
             Sphere s3 = stack.Pop();
             Sphere s4 = stack.Pop();
-            Assert.AreEqual(sphere1, s1);
+            Assert.AreEqual(sphere3, s1);
             Assert.AreEqual(sphere2, s2);
-            Assert.AreEqual(sphere3, s3);
+            Assert.AreEqual(sphere1, s3);
             Assert.AreEqual(null, s4);
         }
 
@@ -229,7 +222,7 @@ namespace UnitTestProject1
             stack.Push(sphere2);
             
             Sphere s1 = stack.Pop();
-            Assert.AreEqual(sphere1, s1);
+            Assert.AreEqual(sphere2, s1);
 
             stack.Push(sphere3);
             stack.Push(sphere4);
@@ -237,7 +230,7 @@ namespace UnitTestProject1
             Sphere s2 = stack.Pop();
             Sphere s3 = stack.Pop();
 
-            Assert.AreEqual(sphere2, s2);
+            Assert.AreEqual(sphere4, s2);
             Assert.AreEqual(sphere3, s3);
 
             Assert.AreEqual(1, stack.Size());
@@ -285,15 +278,42 @@ namespace UnitTestProject1
             for (int i = 2; i < 19; i++)
             {
                 stack.Push(new Sphere(i));
-                Assert.AreEqual(sp, stack.Peek());
+                Assert.AreEqual(i, stack.Peek().GetDiameter());
             }
             for (int i = 1; i < 19; i++)
             {
                 stack.Pop();
                 sp = stack.Peek();
-                if (stack.Size() != 0) Assert.AreEqual(sp, stack.Peek());
+                if (stack.Size() != 0) Assert.AreEqual(18 - i, stack.Peek().GetDiameter());
                 else Assert.AreEqual(null, stack.Peek());
             }
+        }
+        
+
+        [TestMethod]
+        public void TestPushPopSizePeek_1()
+        {
+            Stack<Sphere> stack = new Stack<Sphere>();
+            stack.Push(new Sphere(1));
+            Assert.AreEqual(1, stack.Size());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+            Assert.AreEqual(null, stack.Peek());
+            stack.Pop();
+            Assert.AreEqual(0, stack.Size());
+
+            stack.Push(new Sphere(2));
+            stack.Push(new Sphere(3));
+            Assert.AreEqual(2, stack.Size());
+            Assert.AreEqual(3, stack.Peek().GetDiameter());
+        }
+
+
+        [TestMethod]
+        public void TestBalance_1()
+        {
+            bool b = IsBalanced("()))((()");
+            Assert.AreEqual(true, b);
         }
 
 

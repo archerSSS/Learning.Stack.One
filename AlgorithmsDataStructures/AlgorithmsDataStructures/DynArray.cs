@@ -62,7 +62,7 @@ namespace AlgorithmsDataStructures
             {
                 T[] temp_array = new T[count + 1];
                 array.CopyTo(temp_array, 0);
-                for (int i = count; i >= index; i--)
+                for (int i = count; i > index; i--)
                 {
                     temp_array[i] = array[i - 1];
                 }
