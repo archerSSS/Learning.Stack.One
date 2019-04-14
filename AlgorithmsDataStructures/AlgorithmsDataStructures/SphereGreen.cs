@@ -8,7 +8,7 @@ namespace AlgorithmsDataStructures
 {
     public class SphereGreen : Sphere
     {
-
+        
         public SphereGreen(int d) : base(d)
         {
         }

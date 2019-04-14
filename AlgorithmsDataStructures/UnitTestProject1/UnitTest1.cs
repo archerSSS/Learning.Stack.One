@@ -364,32 +364,5 @@ namespace UnitTestProject1
             Assert.AreEqual(2, stack.Size());
             Assert.AreEqual("c", stack.Peek());
         }
-
-
-        [TestMethod]
-        public void TestBalance_1()
-        {
-            bool b = IsBalanced("()))((()");
-            Assert.AreEqual(true, b);
-        }
-
-
-        public bool IsBalanced(String str)
-        {
-            if (str.Length % 2 > 0) { return false; }
-
-            Stack<String> stack = new Stack<string>();
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (stack.Size() == 0)
-                {
-                    stack.Push(str.Substring(i, 1));
-                    continue;
-                }
-                if (str.Substring(i, 1) == stack.Peek()) stack.Push(str.Substring(i, 1));
-            }
-            if (stack.Size() == (str.Length / 2)) return true; 
-            return false;
-        }
     }
 }
