@@ -10,13 +10,13 @@ namespace AlgorithmsDataStructures
     {
         public static void Main(String[] args)
         {
-            Sphere s1 = new Sphere(1);
-            Sphere s2 = new SphereGreen(2);
+            Stack<String> stack = new Stack<string>();
+            stack.Push("1");
+            stack.Push("3");
+            stack.Push("d");
 
-            Console.WriteLine(s2.GetDiameter());
 
 
-            
             Console.ReadLine();
         }
     }
