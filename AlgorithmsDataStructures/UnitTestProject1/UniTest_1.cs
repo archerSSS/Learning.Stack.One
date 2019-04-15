@@ -11,7 +11,7 @@ namespace UnitTestProject1
     {
 
         [TestMethod]
-        public void CalculateTest_1()
+        public void TestCalculate_1()
         {
             Stack<string> stack1 = PushStrings("8 2 + 5 * 9 + =");
             Stack<string> stack2 = PushStrings("13 5 * 2 - 43 - =");
