@@ -10,19 +10,8 @@ namespace UnitTestProject1
     public class UniTest_1
     {
 
-        [TestMethod]
-        public void TestCalculate_1()
-        {
-            Stack<string> stack1 = PushStrings("8 2 + 5 * 9 + =");
-            Stack<string> stack2 = PushStrings("13 5 * 2 - 43 - =");
-            Stack<string> stack3 = PushStrings("7 * 2 - 3 - =");
-
-            Assert.AreEqual(59, CalcStack(stack1));
-            Assert.AreEqual(20, CalcStack(stack2));
-            Assert.AreEqual(2, CalcStack(stack3));
-        }
-
-
+        // Пункт 4. Тест
+        //
         [TestMethod]
         public void TestBalance_1()
         {
@@ -38,7 +27,47 @@ namespace UnitTestProject1
         }
 
 
-        // Создает Стек.
+        // Пункт 5. Тест
+        //
+        [TestMethod]
+        public void TestCalculate_1()
+        {
+            Stack<string> stack1 = PushStrings("8 2 + 5 * 9 + =");
+            Stack<string> stack2 = PushStrings("13 5 * 2 - 43 - =");
+            Stack<string> stack3 = PushStrings("7 * 2 - 3 - =");
+
+            Assert.AreEqual(59, CalcStack(stack1));
+            Assert.AreEqual(20, CalcStack(stack2));
+            Assert.AreEqual(2, CalcStack(stack3));
+        }
+
+
+        // Сбалансированность. #4
+        //
+        // Проверка на сбалансированность строки
+        // Обрабатывает строку четной длинны включающую в себя два разных символа,
+        // если количество обоих символов в строке совпадает, возвращает значение true
+        //
+        public bool IsBalanced(String str)
+        {
+            if (str.Length % 2 > 0) { return false; }
+
+            Stack<String> stack = new Stack<string>();
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (stack.Size() == 0)
+                {
+                    stack.Push(str.Substring(i, 1));
+                    continue;
+                }
+                if (str.Substring(i, 1) == stack.Peek()) stack.Push(str.Substring(i, 1));
+            }
+            if (stack.Size() == (str.Length / 2)) return true;
+            return false;
+        }
+
+
+        // Создает Стек. #5
         //
         // Включает в себя элементы из строк.
         // Из входящего строчного аргумента после каждого пробела выделяется новый элемент.
@@ -63,7 +92,7 @@ namespace UnitTestProject1
         }
 
 
-        // Решение выражений.
+        // Решение выражений. #5
         //
         // Извлекает и обрабатывает строчные элементы из Стека влючающие в себя числа и знаки (+ - * =)
         // Числовые строки переводит во второй Стек, а операторы используются для результата вычисления двух строчных элементов из второго Стека.
@@ -96,31 +125,6 @@ namespace UnitTestProject1
                 stack1.Pop();
             }
             return 0;
-        }
-
-
-        // Сбалансированность.
-        //
-        // Проверка на сбалансированность строки
-        // Обрабатывает строку четной длинны включающую в себя два разных символа,
-        // если количество обоих символов в строке совпадает, возвращает значение true
-        //
-        public bool IsBalanced(String str)
-        {
-            if (str.Length % 2 > 0) { return false; }
-
-            Stack<String> stack = new Stack<string>();
-            for (int i = 0; i < str.Length; i++)
-            {
-                if (stack.Size() == 0)
-                {
-                    stack.Push(str.Substring(i, 1));
-                    continue;
-                }
-                if (str.Substring(i, 1) == stack.Peek()) stack.Push(str.Substring(i, 1));
-            }
-            if (stack.Size() == (str.Length / 2)) return true;
-            return false;
         }
     }
 }
